@@ -85,6 +85,9 @@ public class QuickContactFragment extends DialogFragment {
 		private final int[] ICONS = { R.drawable.ic_launcher_gplus, R.drawable.ic_launcher_gmail,
 				R.drawable.ic_launcher_gmaps, R.drawable.ic_launcher_chrome };
 
+		private final int[] SWITCH_ICONS = { R.drawable.selector_tab_1, R.drawable.selector_tab_2,
+				R.drawable.selector_tab_3, R.drawable.selector_tab_4 };
+	
 		public ContactPagerAdapter() {
 			super();
 		}
@@ -96,7 +99,8 @@ public class QuickContactFragment extends DialogFragment {
 
 		@Override
 		public int getPageIconResId(int position) {
-			return ICONS[position];
+			return SWITCH_ICONS[position];
+//			return ICONS[position];
 		}
 
 		@Override
