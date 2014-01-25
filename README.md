@@ -1,4 +1,5 @@
 # Android PagerSlidingTabStrip
+This is forked by [astuetz/PagerSlingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip).
 
 Interactive paging indicator widget, compatible with the `ViewPager` from the 
 Android Support Library. 
@@ -6,6 +7,8 @@ Android Support Library.
 Try out the sample application [on the Play Store](https://play.google.com/store/apps/details?id=com.astuetz.viewpager.extensions.sample).
 
 ![PagerSlidingTabStrip Sample Screenshot 1](https://lh3.ggpht.com/PXS7EmHhQZdT1Oa379iy91HX3ByWAQnFZAthMAFa_QHAOHNClEaXU5nxDEAj1F2eqbk)![PagerSlidingTabStrip Sample Screenshot 2](https://lh3.ggpht.com/oaksDoUcQlGB4j7VEkBCOjrvSzjtzVHHcKq8pAnGVfm6oxkcJg_w1QS4tyP3fLcqrwcX)
+
+![PagerSlidingTabStrip Sample Screenshot 3](https://dl.dropboxusercontent.com/u/18613868/Screenshot_2014-01-25-15-53-31.png)
 
 # Usage
 
@@ -42,6 +45,37 @@ Try out the sample application [on the Play Store](https://play.google.com/store
          // continued from above
          tabs.setOnPageChangeListener(mPageChangeListener);
 
+  5. *(Optional)* If you want to `change tab title color` when selected
+     you should set attributes in the xml. **(Added)**
+
+         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <com.astuetz.PagerSlidingTabStrip
+              android:id="@+id/tabs"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              app:pstsTabSwitch="true"
+              app:pstsActivateTextColor="#FF666666"
+              app:pstsDeactivateTextColor="#FFCCCCCC" />
+
+            ...
+         </RelativeLayout>
+
+   6. *(Optional)* If you want to `change tab icon image` when selected
+      you should set pstsTabSwitch attribute in the xml and prepare `drawable selector`. **(Added)**
+
+          <com.astuetz.PagerSlidingTabStrip
+              android:id="@+id/tabs"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              app:pstsTabSwitch="true" />
+
+          ...
+
 # Customization
 
 To not just look like another Play Store styled app, go and adjust these values to match
@@ -58,6 +92,9 @@ your brand:
  * `pstsTabBackground` Background drawable of each tab, should be a StateListDrawable
  * `pstsShouldExpand` If set to true, each tab is given the same weight, default false
  * `pstsTextAllCaps` If true, all tab titles will be upper case, default true
+ * `pstsTabSwitch` When a tab is selected, the drawable selector icon or the text color of the Tab title can be modified **(Added)**
+ * `pstsTextActivateColor` The Title color of selected Tab **(Added)**
+ * `pstsTextDeactivateColor` The Title color of unselected Tabs **(Added)**
 
 *All attributes have their respective getters and setters to change them at runtime*
 
