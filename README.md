@@ -65,8 +65,8 @@ Try out the sample application [on the Play Store](https://play.google.com/store
             ...
          </RelativeLayout>
 
-   6. *(Optional)* If you want to `change tab icon image` when selected
-      you should set pstsTabSwitch attribute in the xml and prepare `drawable selector`. **(Added)**
+  6. *(Optional)* If you want to `change tab icon image` when selected
+     you should set pstsTabSwitch attribute in the xml and prepare `drawable selector`. **(Added)**
 
           <com.astuetz.PagerSlidingTabStrip
               android:id="@+id/tabs"
