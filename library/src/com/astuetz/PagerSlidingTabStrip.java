@@ -33,18 +33,16 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.View.BaseSavedState;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.FrameLayout.LayoutParams;
-
-import java.util.Locale;
 
 import com.astuetz.pagerslidingtabstrip.R;
+
+import java.util.Locale;
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
@@ -61,6 +59,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private LinearLayout.LayoutParams defaultTabLayoutParams;
 	private LinearLayout.LayoutParams expandedTabLayoutParams;
+	private LinearLayout.LayoutParams imageTabParams;
 
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
@@ -173,8 +172,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		dividerPaint.setAntiAlias(true);
 		dividerPaint.setStrokeWidth(dividerWidth);
 
-		defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+		defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		expandedTabLayoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f);
+		imageTabParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		imageTabParams.gravity = Gravity.CENTER;
 
 		if (locale == null) {
 			locale = getResources().getConfiguration().locale;
@@ -245,10 +246,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	private void addIconTab(final int position, int resId) {
-
 		ImageButton tab = new ImageButton(getContext());
 		tab.setImageResource(resId);
-		
 		addTab(position, tab);
 	}
 	
@@ -262,8 +261,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		});
 
 		tab.setPadding(tabPadding, 0, tabPadding, 0);
-		
-		tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);	
+		if(tab instanceof ImageButton) {
+			tabsContainer.addView(tab,position,imageTabParams);
+		} else {
+			tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
+		}
 	}
 
 	private void updateTabStyles() {

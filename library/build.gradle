@@ -1,12 +1,12 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.0'
+    compile 'com.android.support:support-v4:23.0.0'
 }
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+    buildToolsVersion '22.0.1'
 
     defaultConfig {
         minSdkVersion 8
