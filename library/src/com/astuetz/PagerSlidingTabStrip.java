@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
@@ -174,7 +175,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		expandedTabLayoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f);
-		imageTabParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		imageTabParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		imageTabParams.gravity = Gravity.CENTER;
 
 		if (locale == null) {
@@ -294,7 +295,13 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				}
 			} else if (v instanceof ImageButton) {
 				ImageButton tab = (ImageButton) v;
-				tab.setSelected(tabSwitch && i == 0 ? true : false);
+				if(tabSwitch && i != 0) {
+					tab.setColorFilter(Color.BLACK);
+					tab.setAlpha(0.4f);
+				} else {
+					tab.setColorFilter(null);
+					tab.setAlpha(1f);
+				}
 			}
 		}
 	}
@@ -309,7 +316,14 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				TextView tab = (TextView) v;
 				tab.setTextColor(position == i ? tabTextColor : tabDeactivateTextColor); 
 			} else {
-				v.setSelected(position == i ? true : false);
+				ImageButton tab = (ImageButton) v;
+				if(position == i) {
+					tab.setColorFilter(null);
+					tab.setAlpha(1f);
+				} else {
+					tab.setColorFilter(Color.BLACK);
+					tab.setAlpha(0.4f);
+				}
 			}
 		}
 	}
