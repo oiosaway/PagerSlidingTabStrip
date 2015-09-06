@@ -263,7 +263,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		tab.setPadding(tabPadding, 0, tabPadding, 0);
 		if(tab instanceof ImageButton) {
-			tabsContainer.addView(tab,position,imageTabParams);
+			tabsContainer.addView(tab,position,shouldExpand ? expandedTabLayoutParams : imageTabParams);
 		} else {
 			tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
 		}
