@@ -242,7 +242,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		tab.setText(title);
 		tab.setGravity(Gravity.CENTER);
 		tab.setSingleLine();
-		
 		addTab(position, tab);
 	}
 
@@ -281,7 +280,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 				TextView tab = (TextView) v;
 				tab.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
-				tab.setTypeface(tabTypeface, tabTypefaceStyle);
+				tab.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
 				tab.setTextColor(tabSwitch && i != 0 ? tabDeactivateTextColor : tabTextColor);
 
 				// setAllCaps() is only available from API 14, so the upper case is made manually if we are on a
