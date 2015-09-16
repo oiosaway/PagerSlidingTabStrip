@@ -33,11 +33,13 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -93,7 +95,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int tabTextSize = 12;
 	private int tabTextColor = 0xFF666666;
 	private int tabDeactivateTextColor = 0xFFCCCCCC;
-	
+
 	private Typeface tabTypeface = null;
 	private int tabTypefaceStyle = Typeface.BOLD;
 
@@ -237,7 +239,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	private void addTextTab(final int position, String title) {
-
 		TextView tab = new TextView(getContext());
 		tab.setText(title);
 		tab.setGravity(Gravity.CENTER);
@@ -246,9 +247,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	private void addIconTab(final int position, int resId) {
-		ImageButton tab = new ImageButton(getContext());
-		tab.setImageResource(resId);
-		addTab(position, tab);
+		ViewGroup iconWrapper = (ViewGroup) LayoutInflater.from(getContext()).inflate(R.layout.icon_wrapper,null);
+		((ImageView)iconWrapper.getChildAt(0)).setImageResource(resId);
+		addTab(position, iconWrapper);
 	}
 	
 	private void addTab(final int position, View tab) {
@@ -273,11 +274,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		for (int i = 0; i < tabCount; i++) {
 
 			View v = tabsContainer.getChildAt(i);
-			
-			v.setBackgroundResource(!tabSwitch ? tabBackgroundResId : transparentColorId);
+
+			if(!(v instanceof ViewGroup)) {
+				v.setBackgroundResource(!tabSwitch ? tabBackgroundResId : transparentColorId);
+			}
 			
 			if (v instanceof TextView) {
-
 				TextView tab = (TextView) v;
 				tab.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
 				tab.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
@@ -292,8 +294,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 						tab.setText(tab.getText().toString().toUpperCase(locale));
 					}
 				}
-			} else if (v instanceof ImageButton) {
-				ImageButton tab = (ImageButton) v;
+			} else if (v instanceof ViewGroup) {
+				ImageView tab = (ImageView) ((ViewGroup) v).getChildAt(0);
 				if(tabSwitch && i != 0) {
 					tab.setColorFilter(Color.BLACK);
 					tab.setAlpha(0.4f);
@@ -315,7 +317,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 				TextView tab = (TextView) v;
 				tab.setTextColor(position == i ? tabTextColor : tabDeactivateTextColor); 
 			} else {
-				ImageButton tab = (ImageButton) v;
+				ImageView tab = (ImageView) ((ViewGroup) v).getChildAt(0);
 				if(position == i) {
 					tab.setColorFilter(null);
 					tab.setAlpha(1f);
