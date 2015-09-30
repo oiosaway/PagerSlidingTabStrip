@@ -300,7 +300,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 					tab.setColorFilter(Color.BLACK);
 					tab.setAlpha(0.4f);
 				} else {
-					tab.setColorFilter(null);
+					tab.setColorFilter(Color.WHITE);
 					tab.setAlpha(1f);
 				}
 			}
@@ -319,7 +319,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			} else {
 				ImageView tab = (ImageView) ((ViewGroup) v).getChildAt(0);
 				if(position == i) {
-					tab.setColorFilter(null);
+					tab.setColorFilter(Color.WHITE);
 					tab.setAlpha(1f);
 				} else {
 					tab.setColorFilter(Color.BLACK);
